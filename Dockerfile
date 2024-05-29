@@ -7,14 +7,13 @@ WORKDIR /opt/alist/
 
 # Download and extract alist
 RUN wget "https://github.com/alist-org/alist/releases/download/v3.35.0/alist-linux-amd64.tar.gz" -P "/opt/alist/" && \
-    tar -zxvf /opt/alist/alist-linux-amd64.tar.gz && \
-    chmod +x /CMD [ "./alist", "server", "--no-prefix" ]
+    tar -zxvf /opt/alist/alist-linux-amd64.tar.gz
 
 EXPOSE 5244
 
 # Copy the entrypoint script into the container
-COPY entrypoint.sh /opt/alist/entrypoint.sh
-RUN chmod +x /opt/alist/entrypoint.sh
+# COPY entrypoint.sh /opt/alist/entrypoint.sh
+RUN chmod +x /opt/alist/alist
 
-# Use the entrypoint script
-CMD [ "/opt/alist/alist", "server", "--no-prefix" ]
+# Use the ENTRYPOINT script
+ ENTRYPOINT [ "/opt/alist/alist", "server", "--no-prefix" ]
